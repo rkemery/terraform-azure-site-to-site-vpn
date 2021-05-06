@@ -45,6 +45,6 @@ variable "sql_server_admin_password" {}
 variable "sql_server_tags" {}
 variable "sql_server_storage_account_name" {}
 variable "sql_server_storage_account_tier" {}
-variable "sql_server_storage_acocunt_type" {}
+variable "sql_server_storage_account_type" {}
 variable "sql_db_name" {}
 variable "sql_db_tags" {}
