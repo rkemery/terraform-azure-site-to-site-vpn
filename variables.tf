@@ -1,42 +1,37 @@
-variable "rg_name" {
+variable "location" {
 }
 
-variable "vnet_name" {
+variable "version" {
 }
 
-variable "vpn_gw_name" {
+variable "client_name" {
 }
 
-variable "vpn_gw_type" {
+variable "environment" {
 }
 
-variable "local_gw_name" {
+variable "stack" {
 }
 
-variable "local_gw_addr" {
+variable "custom_vnet_name" {
 }
 
-variable "local_addr_space" {
+variable "vnet_cidr" {
   type = list
 }
 
-variable "local_shared_key" {
+variable "custom_vpn_gw_name" {
 }
 
-variable "project_name" {
+variable "subnet_gw_cidr" {
 }
 
-variable "env" {
+variable "on_prem_gw_subnets" {
+  type = list
 }
 
-variable "owner" {
+variable "on_prem_gw_ip" {
 }
 
-variable "bu" {
-}
-
-variable "service_class" {
-}
-
-variable "location" {
+variable "shared_key" {
 }
