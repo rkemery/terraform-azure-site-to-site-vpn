@@ -1,55 +1,64 @@
-module "azure-region" {
-  source  = "claranet/regions/azurerm"
-  version = "4.0.0"
-
-  azure_region = var.location
+resource "azurerm_resource_group" "example" {
+  name     = var.rg_name
+  location = var.location
 }
 
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "4.0.0"
-  location     = module.azure-region.location
-  client_name  = var.client_name
-  environment  = var.environment
-  stack        = var.stack
+resource "azurerm_virtual_network" "example" {
+  name                = var.vnet_name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  address_space       = var.vnet_addr_space
 }
 
-module "azure-network-vnet" {
-  source  = "claranet/vnet/azurerm"
-  version = "4.0.0"
-
-  environment      = var.environment
-  location         = module.azure-region.location
-  location_short   = module.azure-region.location
-  client_name      = var.client_name
-  stack            = var.stack
-  custom_vnet_name = var.custom_vnet_name
-
-  resource_group_name = module.rg.resource_group_name
-  vnet_cidr           = var.vnet_cidr
+resource "azurerm_subnet" "example" {
+  name                 = var.subnet_name
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = var.addr_prefixes
 }
 
-module "vpn-gw" {
-  source  = "claranet/vpn/azurerm"
-  version = "4.0.0"
+resource "azurerm_local_network_gateway" "onpremise" {
+  name                = var.local_network_gw_name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  gateway_address     = var.local_gw_addr
+  address_space       = var.local_gw_addr_space
+}
 
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  resource_group_name = module.rg.resource_group_name
-  location            = module.azure-region.location
-  location_short      = module.azure-region.location
+resource "azurerm_public_ip" "example" {
+  name                = var.public_ip_name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  allocation_method   = var.public_ip_allocation
+}
 
-  # You can set either a prefix for generated name or a custom one for the resource naming
-  custom_name = var.custom_vpn_gw_name
+resource "azurerm_virtual_network_gateway" "example" {
+  name                = var.vnet_gw_name
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
 
-  virtual_network_name = module.azure-network-vnet.virtual_network_name
-  subnet_gateway_cidr  = var.subnet_gw_cidr
+  type     = var.vnet_gw_type
+  vpn_type = var.vnet_gw_vpn_type
 
-  on_prem_gateway_subnets_cidrs = var.on_prem_gw_subnets
-  on_prem_gateway_ip            = var.on_prem_gw_ip
+  active_active = false
+  enable_bgp    = false
+  sku           = var.vnet_gw_vpn_sku
 
-  vpn_ipsec_shared_key = var.shared_key
+  ip_configuration {
+    public_ip_address_id          = azurerm_public_ip.example.id
+    private_ip_address_allocation = var.vnet_gw_private_ip_addr_allocation
+    subnet_id                     = azurerm_subnet.example.id
+  }
+}
 
-  vpn_gw_connection_name = "azure_to_${var.client_name}_on-prem"
+resource "azurerm_virtual_network_gateway_connection" "onpremise" {
+  name                       = var.vnet_gw_connection_name
+  location                   = azurerm_resource_group.example.location
+  resource_group_name        = azurerm_resource_group.example.name
+
+  type                       = var.vnet_gw_connection_type
+  virtual_network_gateway_id = azurerm_virtual_network_gateway.example.id
+  local_network_gateway_id   = azurerm_local_network_gateway.onpremise.id
+
+  shared_key                 = var.vnet_gw_connection_shared_key
 }
