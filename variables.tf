@@ -35,7 +35,9 @@ variable "image_offer" {}
 variable "image_sku" {}
 variable "image_version" {}
 variable "vm_subnet_name" {}
-variable "vm_subnet_service_endpoints" {}
+variable "vm_subnet_service_endpoints" {
+  type = list
+}
 variable "vm_address_prefixes" {
   type = list
 }
