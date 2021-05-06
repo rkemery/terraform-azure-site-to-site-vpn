@@ -20,7 +20,7 @@ module "azure-network-vnet" {
 
   environment      = var.environment
   location         = module.azure-region.location
-  location_short   = module.azure-region.location-short
+  # location_short   = module.azure-region.location-short
   client_name      = var.client_name
   stack            = var.stack
   custom_vnet_name = var.custom_vnet_name
@@ -38,7 +38,7 @@ module "vpn-gw" {
   stack               = var.stack
   resource_group_name = module.rg.resource_group_name
   location            = module.azure-region.location
-  location_short      = module.azure-region.location_short
+  # location_short      = module.azure-region.location_short
 
   # You can set either a prefix for generated name or a custom one for the resource naming
   custom_name = var.custom_vpn_gw_name
