@@ -38,7 +38,7 @@ variable "bu" {
 variable "service_class" {
 }
 
-variable "subscripton_id" {
+variable "subscription_id" {
 }
 
 variable "client_id" {
