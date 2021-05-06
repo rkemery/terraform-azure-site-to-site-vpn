@@ -23,3 +23,14 @@ variable "vnet_gw_private_ip_addr_allocation" {}
 variable "vnet_gw_connection_name" {}
 variable "vnet_gw_connection_type" {}
 variable "vnet_gw_connection_shared_key" {}
+variable "nic_name" {}
+variable "nic_ip_config_name" {}
+variable "nic_private_ip_addr_allocation" {}
+variable "vm_name" {}
+variable "vm_size" {}
+variable "vm_admin_username" {}
+variable "vm_admin_password" {}
+variable "image_publisher" {}
+variable "image_offer" {}
+variable "image_sku" {}
+variable "image_version" {}
