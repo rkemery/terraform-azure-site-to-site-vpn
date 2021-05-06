@@ -4,8 +4,9 @@ resource "azurerm_resource_group" "vpn" {
 }
 
 module "vpn-gateway" {
-  source  = "kumarvna/vpn-gateway/azurerm"
-  version = "1.0.0"
+  source     = "kumarvna/vpn-gateway/azurerm"
+  depends_on = [azurerm_resource_group.vpn]
+  version    = "1.0.0"
 
   # Resource Group, location, VNet and Subnet details
   # IPSec Site-to-Site connection configuration requirements
