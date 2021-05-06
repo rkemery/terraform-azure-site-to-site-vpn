@@ -48,3 +48,4 @@ variable "sql_server_storage_account_tier" {}
 variable "sql_server_storage_account_type" {}
 variable "sql_db_name" {}
 variable "sql_db_tags" {}
+variable "sql_vnet_rule_name" {}
