@@ -1,3 +1,10 @@
+resource "azurerm_subnet" "vm" {
+  name                 = var.vm_subnet_name
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = var.vm_address_prefixes
+}
+
 resource "azurerm_network_interface" "main" {
   name                = var.nic_name
   location            = azurerm_resource_group.example.location
@@ -5,7 +12,7 @@ resource "azurerm_network_interface" "main" {
 
   ip_configuration {
     name                          = var.nic_ip_config_name
-    subnet_id                     = azurerm_subnet.example.id
+    subnet_id                     = azurerm_subnet.vm.id
     private_ip_address_allocation = var.nic_private_ip_addr_allocation
   }
 }
