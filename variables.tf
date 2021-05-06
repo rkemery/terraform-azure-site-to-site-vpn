@@ -37,3 +37,6 @@ variable "bu" {
 
 variable "service_class" {
 }
+
+variable "location" {
+}

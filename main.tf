@@ -1,3 +1,8 @@
+resource "azurerm_resource_group" "vpn" {
+  name     = var.rg_name
+  location = var.location
+}
+
 module "vpn-gateway" {
   source  = "kumarvna/vpn-gateway/azurerm"
   version = "1.0.0"
