@@ -4,6 +4,7 @@ resource "azurerm_subnet" "vm" {
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = var.vm_address_prefixes
   # service_endpoints    = var.vm_subnet_service_endpoints
+  enforce_private_link_endpoint_network_policies = false
 }
 
 resource "azurerm_network_interface" "main" {
