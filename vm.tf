@@ -1,9 +1,8 @@
 resource "azurerm_subnet" "vm" {
-  name                 = var.vm_subnet_name
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = var.vm_address_prefixes
-  # service_endpoints    = var.vm_subnet_service_endpoints
+  name                                           = var.vm_subnet_name
+  resource_group_name                            = azurerm_resource_group.example.name
+  virtual_network_name                           = azurerm_virtual_network.example.name
+  address_prefixes                               = var.vm_address_prefixes
   enforce_private_link_endpoint_network_policies = false
 }
 
