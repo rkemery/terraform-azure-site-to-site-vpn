@@ -37,6 +37,3 @@ variable "bu" {
 
 variable "service_class" {
 }
-
-variable "subscription_id" {
-}
