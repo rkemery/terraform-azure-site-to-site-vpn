@@ -9,7 +9,7 @@ module "vpn-gateway" {
 
   # Resource Group, location, VNet and Subnet details
   # IPSec Site-to-Site connection configuration requirements
-  resource_group_name  = var.rg_name
+  resource_group_name  = azurerm_resource_group.vpn.name
   virtual_network_name = var.vnet_name
   vpn_gateway_name     = var.vpn_gw_name
   gateway_type         = var.vpn_gw_type
