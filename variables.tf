@@ -1,9 +1,6 @@
 variable "location" {
 }
 
-variable "version" {
-}
-
 variable "client_name" {
 }
 
