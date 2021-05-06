@@ -11,6 +11,20 @@ resource "azurerm_sql_server" "example" {
   }
 }
 
+resource "azurerm_private_endpoint" "endpoint" {
+  name                         = var.private_endpoint_name
+  resource_group_name          = azurerm_resource_group.example.name
+  location                     = azurerm_resource_group.example.location
+  subnet_id                    = azurerm_subnet.vm.id
+
+  private_service_connection {
+    is_manual_connection       = false
+    name                       = var.private_endpoint_connection_name
+    private_connection_resource_id = azurerm_sql_server.example.id
+    subresource_names          = ["sqlServer"]
+  }
+}
+
 resource "azurerm_storage_account" "example" {
   name                     = var.sql_server_storage_account_name
   resource_group_name      = azurerm_resource_group.example.name
