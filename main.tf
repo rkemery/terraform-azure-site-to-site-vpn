@@ -1,13 +1,13 @@
 module "azure-region" {
   source  = "claranet/regions/azurerm"
-  version = var.version
+  version = "4.0.0"
 
   azure_region = var.location
 }
 
 module "rg" {
   source  = "claranet/rg/azurerm"
-  version = var.version
+  version = "4.0.0"
   location     = module.azure-region.location
   client_name  = var.client_name
   environment  = var.environment
@@ -16,7 +16,7 @@ module "rg" {
 
 module "azure-network-vnet" {
   source  = "claranet/vnet/azurerm"
-  version = var.version
+  version = "4.0.0"
 
   environment      = var.environment
   location         = module.azure-region.location
@@ -31,7 +31,7 @@ module "azure-network-vnet" {
 
 module "vpn-gw" {
   source  = "claranet/vpn/azurerm"
-  version = var.version
+  version = "4.0.0"
 
   client_name         = var.client_name
   environment         = var.environment
