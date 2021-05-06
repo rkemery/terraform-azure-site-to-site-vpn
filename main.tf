@@ -46,8 +46,8 @@ module "vpn-gw" {
   virtual_network_name = module.azure-network-vnet.virtual_network_name
   subnet_gateway_cidr  = var.subnet_gw_cidr
 
-  on_prem_gateway_subnets_cidrs = var.on_prem_gateway_subnets
-  on_prem_gateway_ip            = var.on_prem_gateway_ip
+  on_prem_gateway_subnets_cidrs = var.on_prem_gw_subnets
+  on_prem_gateway_ip            = var.on_prem_gw_ip
 
   vpn_ipsec_shared_key = var.shared_key
 
